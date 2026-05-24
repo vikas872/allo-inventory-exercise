@@ -45,7 +45,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
       if (difference <= 0) {
         clearInterval(interval);
         setTimeLeft(0);
-        setReservation(prev => ({ ...prev, status: "EXPIRED" }));
+        setReservation((prev: any) => ({ ...prev, status: "EXPIRED" }));
         toast.error("Reservation has expired");
       } else {
         setTimeLeft(Math.floor(difference / 1000));
@@ -66,7 +66,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
       if (!res.ok) {
         if (res.status === 410) {
           toast.error("Reservation expired. You were too late.");
-          setReservation(prev => ({ ...prev, status: "EXPIRED" }));
+          setReservation((prev: any) => ({ ...prev, status: "EXPIRED" }));
         } else {
           toast.error("Failed to confirm purchase.");
         }
@@ -74,7 +74,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
       }
       
       toast.success("Purchase confirmed successfully!");
-      setReservation(prev => ({ ...prev, status: "CONFIRMED" }));
+      setReservation((prev: any) => ({ ...prev, status: "CONFIRMED" }));
     } catch {
       toast.error("An unexpected error occurred");
     } finally {
@@ -92,7 +92,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
       
       if (res.ok) {
         toast.success("Reservation released.");
-        setReservation(prev => ({ ...prev, status: "RELEASED" }));
+        setReservation((prev: any) => ({ ...prev, status: "RELEASED" }));
       } else {
         toast.error("Failed to release reservation.");
       }
